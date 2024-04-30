@@ -4,6 +4,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("DjangoEcommerceApp.urls")),
-    path('', include("DjangoEcommerceApp.AdminUrls")),
+    # path('', include("DjangoEcommerceApp.urls")),
+    # path('', include("DjangoEcommerceApp.AdminUrls")),
 ]
