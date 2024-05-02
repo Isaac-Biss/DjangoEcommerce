@@ -7,6 +7,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
 
 def register(request):
     if request.method == 'POST':
@@ -37,7 +38,7 @@ def activate(request, uidb64, token):
         user = CustomUser.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
         user = None
-    if user is not active and default_token_generator.check_token(user, token):
+    if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
         return redirect('activation_complete')
